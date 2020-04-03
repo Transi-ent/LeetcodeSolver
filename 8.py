@@ -1,5 +1,7 @@
+import re
 class Solution:
     def myAtoi(self, s: str) -> int:
+
         s = s.strip()
         if not s or s[0].isalpha():
             return 0
@@ -31,5 +33,22 @@ class Solution:
         else:
             return res
 
-res = Solution().myAtoi("  -0012a42")
+class Solution2:
+    """
+    re: 用于处理正则表达式的模块
+    \^: 匹配字符串的开头
+    [\-\+]: 匹配 '-'，'+'z中的一个
+    ?: 前面的模式出现一次或没有，相当于对前面的模式取 True 操作；
+    \d: 匹配数字；
+    +： 前面的模式至少匹配一次；
+    """
+    def myAtoi(self, s: str) -> int:
+        lyst = re.findall('^[\-\+]?\d+', s.strip())
+        if lyst:
+            res = lyst[0]
+        else:
+            return 0
+        return max( min(int(res), 2**31-1), -2**31 )
+
+res = Solution2().myAtoi("words and 987")
 print(res)
