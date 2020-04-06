@@ -22,4 +22,3 @@ class Solution:
                     if n_A>1:
                         return False
         return True
-
