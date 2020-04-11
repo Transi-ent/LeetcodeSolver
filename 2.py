@@ -4,6 +4,26 @@ class ListNode:
         self.val = x
         self.next = None
 
+class LinkedList:
+    def __init__(self, arr: list):
+        self.dummyhead = ListNode(-1)
+        cur = self.dummyhead
+        for e in arr:
+            cur.next = ListNode(e)
+            cur = cur.next
+
+        #print("INIT: ",self.dummyhead.next.val)
+
+    def head(self):
+        return self.dummyhead.next
+
+def printLinkedList(ll: ListNode):
+    while ll:
+        print(ll.val, end=' ')
+        if ll.next:
+            print('->', end=' ')
+        ll = ll.next
+
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
 
@@ -44,25 +64,6 @@ class Solution:
         return dummyhead.next
 
 
-class LinkedList:
-    def __init__(self, arr: list):
-        self.dummyhead = ListNode(-1)
-        cur = self.dummyhead
-        for e in arr:
-            cur.next = ListNode(e)
-            cur = cur.next
-
-        #print("INIT: ",self.dummyhead.next.val)
-
-    def head(self):
-        return self.dummyhead.next
-
-def printLinkedList(ll: ListNode):
-    while ll:
-        print(ll.val, end=' ')
-        if ll.next:
-            print('->', end=' ')
-        ll = ll.next
 
 ll1 = LinkedList([2,4,3]).head()
 ll2 = LinkedList([5,6,4]).head()
