@@ -63,6 +63,32 @@ class Solution:
 
         return dummyhead.next
 
+class Solution2:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        dummyhead = ListNode(-1)
+        cur = dummyhead
+
+        flag = 0
+        while l1 or l2:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+            val = v1 + v2 + flag
+            if val>9:
+                flag, val = divmod(val, 10)
+            else:
+                flag = 0
+            cur.next = ListNode(val)
+            cur = cur.next
+            if l1:
+                l1 = l1.next
+            if l2:
+                l2 = l2.next
+
+        if flag:
+            cur.next = ListNode(flag)
+
+        return dummyhead.next
+
 
 
 ll1 = LinkedList([2,4,3]).head()
