@@ -20,3 +20,19 @@ class Solution:
             else:
                 left+=1
         return area
+
+class Solution2:
+    """
+    双指针 —— 对撞指针
+    """
+    def maxArea(self, height: list) -> int:
+        left, right = 0, len(height)-1
+        res = 0
+        while left<right:
+            res = max(res, (right-left)*min(height[left], height[right]))
+            if height[left]>height[right]:
+                right -= 1
+            else:
+                left += 1
+
+        return res
