@@ -37,3 +37,26 @@ class Solution:
         res = [em[-1] for em in res]
 
         return res
+
+class Solution2:
+    """
+    先 BFS，层序遍历，取出每一层的最后一个数。
+    """
+    def rightSideView(self, root: TreeNode) -> list[int]:
+        if root is None:
+            return []
+        res = []
+        cur = [root]
+        next = []
+        while cur:
+            tmp = []
+            for node in cur:
+                tmp.append(node.val)
+                if node.left:
+                    next.append(node.left)
+                if node.right:
+                    next.append(node.right)
+
+            cur, next = next, []
+            res.append(tmp)
+        return [ly[-1] for ly in res]
