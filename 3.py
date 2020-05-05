@@ -50,10 +50,36 @@ def lengthOfLongestSubstring( s: str) -> int:
 
     return longest
 
+class Solution:
+    """
+    使用滑动窗口，记录最长无重复子串的长度(利用左右两个指针left, right，
+    当 right 所指字母未出现过，right++，当出现过时，left++，直至right所指的字母
+    没有出现过，在这个过程记录，两个指针所代表子串的最大长度)
+    """
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        n = len(s)
+        if n<2:
+            return n
+        left, right = 0, 0
+        res, charSet = 1, set(s[0])
+        while right<n:
+            if right+1>=len(s):
+                break
+            if not s[right+1] in charSet:
+                right += 1
+                charSet.add(s[right])
+                res = max(res, right-left+1)
+            else:
+                charSet.remove(s[left])
+                left += 1
+        return res
 
 
 
-print(lengthOfLongestSubstring("abcabcbb"))
+
+res = Solution().lengthOfLongestSubstring("pwwkew")
+
+print(res)
 
 
 
