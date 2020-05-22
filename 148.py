@@ -85,7 +85,8 @@ class Solution:
         if tail is None:
             return None
         ret = tail.next
-        tail.next = None
+        tail.next = None # TODO: 如果这一步不置空的话，相当于没有断开链，
+                            # ...也就是你只是找到了第 n 个节点并将其返回但是并没有断开
         return ret
 
     # def cut(self, head: ListNode, step: int):
