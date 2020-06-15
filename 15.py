@@ -1,22 +1,3 @@
-"""
-给定一个整型数组，找出所有的3元组，使元组和为0
-"""
-
-def threeSum(nums: list, target: int):
-
-    d = dict()
-
-    for i in range(len(nums)-1):
-
-        for j in range(i, len(nums)):
-
-            complement = -(nums[i]+nums[j])
-
-            if d.get(complement):
-                return [complement, nums[i], nums[j]]
-
-            d[complement] = 1
-
 class Solution:
     """
     使用查找表，并将找到的结果排好序连成一个字符串放入哈希集合中
@@ -91,4 +72,47 @@ class Solution2:
         print(res)
         return res
 
-Solution2().threeSum([-1,0,1,2,-1,-4])
+class Solution3:
+    """
+    1、暴力解：三层for循环；
+    2、查找表：将所有元素放入查找表内，两层for循环+一个查找表，时间复杂度O(n^2)
+    """
+    def threeSum(self, nums: list) -> list:
+        if len(nums)<3:
+            return []
+
+        # 建立查找表
+        map = {}
+        for i, num in enumerate(nums):
+            if map.get(num):
+                map[num].append(i)
+            else:
+                map[num] = [i]
+
+        res = []
+        visited = set()
+        print(map)
+        for i in range(len(nums)-2):
+            for j in range(i+1, len(nums)-1):
+
+                third = 0 - nums[i] - nums[j]
+
+                if third in map:
+                    print("third : {}".format(third))
+                    tmp = [nums[i], nums[j]]
+                    idxs = map[third]
+                    idxs = [k for k in idxs if k > j]
+                    while idxs:
+                        print("idxs : {}".format(idxs))
+                        copyOfList = tmp.copy()
+                        copyOfList.append(nums[idxs.pop(0)])
+                        s = ''.join([str(w) for w in sorted(copyOfList)])
+                        if not s in visited:
+                            print("copy : {}".format(copyOfList))
+                            res.append(copyOfList)
+                            visited.add(s)
+
+        return res
+
+res = Solution3().threeSum([-1,0,1,2,-1,-4])
+print(res)
