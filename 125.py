@@ -18,7 +18,8 @@ class Solution:
 
 class Solution2:
     """
-    还有一个相当笨的方法就是，先把不是 alnum 的字符先过滤掉再用双指针
+    TODO: 对字符串中的数字使用 lower() 函数竟然不报错；
+    评论区方法：对s.lower() 使用filter过滤，再进行join()
     """
     def isPalindrome(self, s: str) -> bool:
         left, right = 0, len(s)-1
