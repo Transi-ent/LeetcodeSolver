@@ -56,8 +56,24 @@ class Solution3:
 
         return traceBack(s)
 
+class Solution4:
+    def wordBreak(self, s: str, wordDict: list) -> bool:
+        # 使用记忆化搜索，将搜索过的非空字符串返回的结果存放在 memo 字典中
+        memo = {}
+        def traceback(s: str):
+            if s=="":
+                return True
+            if s in memo:
+                return memo[s]
+            flag = False
+            for j in range(1,len(s)+1):
+                if s[:j] in wordDict:
+                    flag = flag or traceback(s[j:])
+            memo[s] = flag
+            return flag
+        return traceback(s)
 
-s="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab"
-wordDict=["a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"]
-res = Solution3().wordBreak(s, wordDict)
+s="aaaaaaa"
+wordDict=["aaaa", "aaa"]
+res = Solution4().wordBreak(s, wordDict)
 print(res)
