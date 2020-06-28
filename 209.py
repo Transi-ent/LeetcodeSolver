@@ -76,10 +76,29 @@ def minSubArrayLen( s: int, nums: list) -> int:
             if right<len(nums):
                 sum_tmp += nums[right]
 
-
     return minLen
+
+class Solution:
+    def minSubArrayLen(self, s: int, nums: list) -> int:
+        if len(nums)==0 or sum(nums)<s:
+            return 0
+        # 使用2个指针用来定义一个滑动窗口，[left, right] 该窗口左闭右闭
+        left, right, res = 0, -1, float('inf')
+        tmpSum = 0
+        while right<len(nums):
+            if tmpSum<s:
+                right += 1
+                if right>=len(nums):
+                    break
+                tmpSum += nums[right]
+            elif tmpSum>=s:
+                res = min(res, right - left + 1)
+                tmpSum -= nums[left]
+                left += 1
+        return res
+
 
 a = minSubArrayLen(7, [2,3,1,2,4,3])
 
-print(a)
+print(Solution().minSubArrayLen(7, [2,3,1,2,4,3]))
 
