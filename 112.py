@@ -28,3 +28,14 @@ class Solution:
         return self.hasPathSum2(root.left, sum-root.val) or \
             self.hasPathSum2(root.right, sum-root.val)
 
+class Solution2:
+    def hasPathSum(self, root: TreeNode, sum: int) -> bool:
+        if root is None:
+            return False
+        if root.left == None and root.right == None:
+            if root.val==sum:
+                return True
+            else:
+                return False
+        return self.hasPathSum(root.left, sum-root.val) or \
+               self.hasPathSum(root.right, sum-root.val)
