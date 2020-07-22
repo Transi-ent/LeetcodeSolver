@@ -37,10 +37,10 @@ class Solution2:
 
             # 以每种情况为根节点进行递归
             for i in range(left, right+1):
-                left = buildTree(left, i-1)
-                right = buildTree(i+1, right)
-                for l in left:
-                    for r in right:
+                leftTree = buildTree(left, i-1)
+                rightTree = buildTree(i+1, right)
+                for l in leftTree:
+                    for r in rightTree:
                         cur = TreeNode(i)
                         cur.left = l
                         cur.right = r
