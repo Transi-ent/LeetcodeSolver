@@ -12,7 +12,8 @@ class Solution:
                 right = [l.pop() for l in matrix]
                 res += right
             # 过滤空列表元素
-            matrix = [i for i in matrix if i]
+            if len(matrix)==0 or len(matrix[0])==0:
+                break
             # 3. 取下
             if matrix:
                 down = matrix.pop()[::-1]
@@ -22,7 +23,8 @@ class Solution:
             if matrix:
                 left = [l.pop(0) for l in matrix][::-1]
                 res += left
-            matrix = [i for i in matrix if i]
+            if len(matrix) == 0 or len(matrix[0]) == 0:
+                break
         return res
 
 matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16]]
